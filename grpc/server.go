@@ -5,7 +5,7 @@ import (
 	"log"
 	"google.golang.org/grpc"
 	pb "github.com/karankumarshreds/GoStreaming/protofiles"
-	payment "github.com/karankumarshreds/GoStreaming/payment"
+	"github.com/karankumarshreds/GoStreaming/payment"
 )
 
 const (
@@ -19,5 +19,14 @@ func main() {
 		log.Fatalf("Error while listening %v", err)
 	}
 
-	pb.RegisterMoneyTransactionServer(grpcServer, &paymentServer)
+	// register payment service as the money transaction server 
+	paymentService := payment.PaymentServer{}
+	pb.RegisterMoneyTransactionServer(grpcServer, &paymentService)
+
+	err = grpcServer.Serve(listener)
+	if err != nil {
+		log.Fatalf("Error while serving %v", err)
+	}
+	log.Println("Listening on port", port)
+
 }
