@@ -11,10 +11,11 @@ const (
 	streamSteps = 3
 )
 
-type paymentServer struct{}
+// keep uppercase to make it accessible by other packages
+type PaymentServer struct{}
 
 // implements MakeTransaction from pb (check the compiled code)
-func (p *paymentServer) MakeTransaction(in *pb.TransactionRequest, stream pb.MoneyTransaction_MakeTransactionServer) error {
+func (p *PaymentServer) MakeTransaction(in *pb.TransactionRequest, stream pb.MoneyTransaction_MakeTransactionServer) error {
 	
 	log.Printf("Got amount %v : ", in.Amount)
 	log.Printf("Got from %v : ", in.From)

@@ -19,5 +19,5 @@ func main() {
 		log.Fatalf("Error while listening %v", err)
 	}
 
-	pb.RegisterMoneyTransactionServer(grpcServer, )
+	pb.RegisterMoneyTransactionServer(grpcServer, &paymentServer)
 }
